@@ -1,0 +1,173 @@
+/* General styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #333;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #ffffff, #f3f3f3);
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.title h1 {
+  font-size: 28px;
+  margin: 0;
+}
+
+.title h2 {
+  font-size: 18px;
+  margin: 5px 0;
+  color: #666;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+  margin: 0 20px;
+}
+
+/* Cards */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px auto;
+  max-width: 400px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+  animation: fadeIn 1.5s ease;
+}
+
+/* Buttons */
+button {
+  padding: 12px 25px;
+  margin: 10px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Donate button pulse */
+.donate > button {
+  animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); box-shadow: 0 0 10px rgba(76,175,80,0.4); }
+  50%  { transform: scale(1.08); box-shadow: 0 0 20px rgba(76,175,80,0.6); }
+  100% { transform: scale(1); box-shadow: 0 0 10px rgba(76,175,80,0.4); }
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #45a049;
+  box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Hidden sections */
+.hidden {
+  display: none;
+}
+
+/* Wallet box */
+.wallet-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+}
+
+.wallet-box input {
+  width: 70%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  text-align: center;
+}
+
+/* Flash effect for Sent button */
+.flash {
+  animation: flashEffect 0.6s ease;
+}
+
+@keyframes flashEffect {
+  0%   { background-color: #2196F3; box-shadow: 0 0 5px #2196F3; }
+  50%  { background-color: #4CAF50; box-shadow: 0 0 20px #4CAF50; }
+  100% { background-color: #2196F3; box-shadow: 0 0 5px #2196F3; }
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Logo animations */
+.bounce-in {
+  animation: bounceIn 1.5s ease forwards;
+}
+
+@keyframes bounceIn {
+  0%   { opacity: 0; transform: scale(0.5) translateY(-50px); }
+  60%  { opacity: 1; transform: scale(1.1) translateY(10px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+/* Thank You Page */
+.thankyou-page {
+  background: linear-gradient(135deg, #fff, #f7f7f7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.thankyou-message {
+  text-align: center;
+  animation: fadeIn 2s ease forwards;
+  z-index: 1;
+}
+
+.thankyou-message h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.thankyou-message p {
+  font-size: 22px;
+  color: #666;
+}
+
+.back-home {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #2196F3;
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+
+.back-home:hover {
+  background: #1976D2;
+  }
