@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support James</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Floating particles background -->
+  <canvas id="particles"></canvas>
+
+  <!-- Header -->
+  <div class="header fade-in">
+    <img src="logo1.png" alt="Logo Left" class="logo bounce-in">
+    <div class="title">
+      <h1>Support James, Our Brother..</h1>
+      <h2>Thank you for your love and support! 🔴⚪</h2>
+    </div>
+    <img src="logo2.png" alt="Logo Right" class="logo bounce-in">
+  </div>
+
+  <!-- Donation Section -->
+  <div class="donate card">
+    <h3>Any contribution, big or small, means the world...</h3>
+    <button onclick="togglePayment()">💰 Donate</button>
+
+    <div id="payment-options" class="hidden">
+      <p>Choose your preferred payment method:</p>
+      <button onclick="showBitcoin()">Bitcoin</button>
+
+      <div id="bitcoin-box" class="hidden">
+        <p><strong>Wallet Address:</strong></p>
+        <div class="wallet-box">
+          <input type="text" id="wallet" value="bc1q036k7urq5pvjq29pep96ds4gftgmwycymnzs48" readonly>
+          <button onclick="copyWallet()">Copy</button>
+        </div>
+        <button class="send-btn" onclick="redirectThankYou()">Sent</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
