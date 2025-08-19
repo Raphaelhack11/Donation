@@ -1,26 +1,169 @@
-<script>
-  // One-time burst on load
-  window.onload = () => {
-    confetti({
-      particleCount: 150,
-      spread: 80,
-      origin: { y: 0.6 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* behind content */
+    }
+
+    .thankyou-box {
+      background: rgba(255, 255, 255, 0.92);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      text-align: center;
+      animation: fadeInUp 1s ease;
+    }
+
+    .thankyou-box h1 {
+      font-size: 32px;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 10px;
+    }
+
+    .thankyou-box h2 {
+      font-size: 20px;
+      font-weight: 400;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .thankyou-box .primary-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #ff6b6b;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .thankyou-box .primary-btn:hover {
+      background: #ff4757;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="thankyou-box">
+    <h1>🎉 Thank You! 🎉</h1>
+    <h2>Your support means the world 💖</h2>
+    <a href="index.html" class="primary-btn">Go Back Home</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script>
+    // Confetti burst on load
+    window.onload = () => {
+      // One-time confetti burst
+      confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+
+      // Continuous slow background confetti
+      const duration = 10000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 0, ticks: 200, gravity: 0.3, zIndex: 0 };
+
+      const interval = setInterval(() => {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) return clearInterval(interval);
+
+        confetti({
+          ...defaults,
+          particleCount: 2 + Math.random() * 3,
+          origin: { x: Math.random(), y: Math.random() * 0.6 }
+        });
+      }, 250);
+    };
+
+    // Optional: floating background particles like main page
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particlesArray = [];
+    const colors = ["#ff6b6b", "#feca57", "#48dbfb", "#1dd1a1", "#5f27cd"];
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     });
 
-    // Continuous slow confetti in the background
-    const duration = 10000; // duration in ms
-    const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 0, ticks: 200, gravity: 0.3, zIndex: 0 };
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 4 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
 
-    const interval = setInterval(() => {
-      const timeLeft = animationEnd - Date.now();
-      if (timeLeft <= 0) return clearInterval(interval);
+    function initParticles(count) {
+      particlesArray = [];
+      for (let i = 0; i < count; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    initParticles(100);
 
-      confetti({
-        ...defaults,
-        particleCount: 2 + Math.random() * 3,
-        origin: { x: Math.random(), y: Math.random() * 0.6 }
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(p => {
+        p.update();
+        p.draw();
       });
-    }, 250); // small bursts every 250ms
-  };
-    </script>
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+  </script>
+</body>
+</html>
