@@ -1,19 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thank You</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body class="thankyou-page">
-  <div class="thankyou-message">
-    <h1>🎉 Thank You! 🎉</h1>
-    <p>Your support means the world to us ❤️</p>
-    <a href="./index.html" class="back-home">⬅ Back to Home</a>
-  </div>
+<script>
+  // One-time burst on load
+  window.onload = () => {
+    confetti({
+      particleCount: 150,
+      spread: 80,
+      origin: { y: 0.6 }
+    });
 
-  <canvas id="confetti"></canvas>
-  <script src="./confetti.js"></script>
-</body>
-</html>
+    // Continuous slow confetti in the background
+    const duration = 10000; // duration in ms
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 0, ticks: 200, gravity: 0.3, zIndex: 0 };
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+      if (timeLeft <= 0) return clearInterval(interval);
+
+      confetti({
+        ...defaults,
+        particleCount: 2 + Math.random() * 3,
+        origin: { x: Math.random(), y: Math.random() * 0.6 }
+      });
+    }, 250); // small bursts every 250ms
+  };
+    </script>
